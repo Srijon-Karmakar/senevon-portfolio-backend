@@ -13,42 +13,17 @@ const app = express();
 
 // Allow requests from your frontend domain
 app.use(cors({
-  origin: "https://senevon-portfolio-o3xh.onrender.com",  // your frontend URL on Render
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  origin: "https://senevon-portfolio-o3xh.onrender.com",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true
 }));
-app.options(cors());  
+
+// Preflight (Express 5-safe)
+app.options('(.*)', cors());   // <-- this is the correct form
 
 // Security + parsers
 app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use(express.json({ limit: "1mb" }));
-
-
-
-// // CORS (single place)
-// const allowed = process.env.CLIENT_ORIGIN?.split(",").map(s => s.trim()).filter(Boolean)
-//   || ["http://localhost:5173"];
-// app.use(cors({ origin: allowed, credentials: false }));
-
-
-// // ---- CORS (single place) ----
-// const allowedOrigins = (process.env.CLIENT_ORIGIN?.split(",") || [
-//   "http://localhost:5173",
-//   "https://senevon-portfolio-o3xh.onrender.com"
-// ]);
-
-// app.use(cors({
-//   origin: allowedOrigins,
-//   methods: ["GET", "POST", "PUT", "DELETE"],
-//   credentials: true
-// }));
-
-// // Handle preflight
-// // app.options("*", cors());
-// app.options("*", cors());
-
-
-
 
 app.use(morgan("tiny"));
 app.set("trust proxy", 1);
