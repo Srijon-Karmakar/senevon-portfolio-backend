@@ -17,6 +17,7 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
+app.options("*", cors());
 
 // Security + parsers
 app.use(helmet({ crossOriginResourcePolicy: false }));
