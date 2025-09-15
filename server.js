@@ -12,11 +12,11 @@ import adminRoutes from "./routes/adminRoutes.js";
 const app = express();
 
 // Allow requests from your frontend domain
-// app.use(cors({
-//   origin: "https://senevon-portfolio-o3xh.onrender.com",  // your frontend URL on Render
-//   methods: ["GET", "POST", "PUT", "DELETE"],
-//   credentials: true
-// }));
+app.use(cors({
+  origin: "https://senevon-portfolio-o3xh.onrender.com",  // your frontend URL on Render
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
 // Security + parsers
 app.use(helmet({ crossOriginResourcePolicy: false }));
@@ -30,21 +30,21 @@ app.use(express.json({ limit: "1mb" }));
 // app.use(cors({ origin: allowed, credentials: false }));
 
 
-// ---- CORS (single place) ----
-const allowedOrigins = (process.env.CLIENT_ORIGIN?.split(",") || [
-  "http://localhost:5173",
-  "https://senevon-portfolio-o3xh.onrender.com"
-]);
+// // ---- CORS (single place) ----
+// const allowedOrigins = (process.env.CLIENT_ORIGIN?.split(",") || [
+//   "http://localhost:5173",
+//   "https://senevon-portfolio-o3xh.onrender.com"
+// ]);
 
-app.use(cors({
-  origin: allowedOrigins,
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}));
+// app.use(cors({
+//   origin: allowedOrigins,
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   credentials: true
+// }));
 
-// Handle preflight
+// // Handle preflight
+// // app.options("*", cors());
 // app.options("*", cors());
-app.options("*", cors());
 
 
 
