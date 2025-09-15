@@ -19,7 +19,7 @@ app.use(cors({
 }));
 
 // Preflight (Express 5-safe)
-app.options('(.*)', cors());   // <-- this is the correct form
+app.options('/:path(*)', cors());   
 
 // Security + parsers
 app.use(helmet({ crossOriginResourcePolicy: false }));
